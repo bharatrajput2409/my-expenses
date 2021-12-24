@@ -8,15 +8,27 @@ import defaultStyle from "../../config/defaultStyle";
 import AppFabs from "./Fabs";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import TouchableComponent from "./Touchable";
-function Screen({ children, style, home, setActiveTab, navBar }) {
+import BackNav from "./navbar/BackNav";
+function Screen({
+  children,
+  style,
+  home,
+  setActiveTab,
+  navBar,
+  backNav,
+  backAction,
+  navTitle,
+}) {
   return (
     <>
       <SafeAreaView style={[styles.root, style && style]}>
-        {navBar ? (
-          navBar
-        ) : (
-          <NavBar home={Boolean(home)} setActiveTab={setActiveTab} />
-        )}
+        {!backNav &&
+          (navBar ? (
+            navBar
+          ) : (
+            <NavBar home={Boolean(home)} setActiveTab={setActiveTab} />
+          ))}
+        {backNav && <BackNav backAction={backAction} title={navTitle} />}
         <Provider>
           <ScrollView style={styles.scrollView}>{children}</ScrollView>
         </Provider>

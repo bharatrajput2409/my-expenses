@@ -5,11 +5,13 @@ import Screen from "../common/Screen";
 import PersonalTab from "../personal/PersonalTab";
 import GroupsTab from "../groups/GroupsTab";
 import IndividualTab from "../individual/IndividualTab";
+import ShoppingTab from "../shopping/ShoppingTab";
 
 function Home(props) {
-  const [activeTab, setActiveTab] = useState("personal");
+  const [activeTab, setActiveTab] = useState("shopping");
   return (
     <Screen style={styles.root} home setActiveTab={setActiveTab}>
+      {activeTab === "shopping" && <ShoppingTab />}
       {activeTab === "personal" && <PersonalTab />}
       {activeTab == "individual" && <IndividualTab />}
       {activeTab == "groups" && <GroupsTab />}

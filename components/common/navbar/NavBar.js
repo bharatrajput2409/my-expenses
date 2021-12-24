@@ -25,7 +25,7 @@ const NavBar = ({ home, setActiveTab }) => {
         }}
         statusBarHeight={0}
       >
-        <Appbar.Content title="Expenses" />
+        <Appbar.Content title="Expenses" color="white" />
         <AppIconButton
           icon="menu"
           onPress={() => setNavOpen(!navOpen)}
@@ -36,7 +36,7 @@ const NavBar = ({ home, setActiveTab }) => {
       {home && (
         <View style={styles.homeNav}>
           <Touchable
-            onPress={() => setActiveTab("personal")}
+            onPress={() => setActiveTab("shopping")}
             style={styles.homeNavBtn}
           >
             <Text
@@ -46,7 +46,7 @@ const NavBar = ({ home, setActiveTab }) => {
                 textAlign: "center",
               }}
             >
-              Personal
+              Shopping
             </Text>
           </Touchable>
           <Touchable

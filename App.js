@@ -4,6 +4,7 @@ import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 
 import Home from "./components/screens/Home";
 import IndividualUser from "./components/screens/IndividualUser";
+import ShoppingList from "./components/screens/ShoppingList";
 import theme from "./config/defaultStyle";
 
 const themePaper = {
@@ -20,7 +21,8 @@ export default function App() {
   return (
     <PaperProvider theme={themePaper}>
       {/* <Home /> */}
-      <IndividualUser />
+      {/* <IndividualUser /> */}
+      <ShoppingList />
     </PaperProvider>
   );
 }
