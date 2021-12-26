@@ -39,6 +39,7 @@ function ShoppingListCard(props) {
 }
 const styles = StyleSheet.create({
   root: {
+    backgroundColor: "white",
     display: "flex",
     flexDirection: "row",
     padding: 10,
@@ -46,15 +47,17 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderStyle: "solid",
     borderBottomWidth: 1,
+    elevation: 1,
   },
   left: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(0,0,0,0.1)",
+    backgroundColor: "white",
     borderRadius: 30,
     height: 50,
     width: 50,
     marginRight: 10,
+    elevation: 4,
   },
   right: {
     flexGrow: 1,

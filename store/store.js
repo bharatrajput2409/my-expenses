@@ -1,7 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-
+import ui from "./ui";
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    ui,
+  },
 });
 
 export default store;

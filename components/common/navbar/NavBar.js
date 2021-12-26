@@ -7,10 +7,12 @@ import NavDrawer from "./NavDrawer";
 import AppIconButton from "../IconButton";
 import Touchable from "../Touchable";
 import paperTheme from "../../../config/paperTheme";
+import { useSelector } from "react-redux";
 
-const NavBar = ({ home, setActiveTab }) => {
+const NavBar = ({ expeseNav, setActiveTab }) => {
   const statusBarHeight = Constants.statusBarHeight;
   const [navOpen, setNavOpen] = React.useState(false);
+  const activeTab = useSelector((state) => state.ui.activeTab);
   return (
     <>
       <StatusBar
@@ -25,7 +27,11 @@ const NavBar = ({ home, setActiveTab }) => {
         }}
         statusBarHeight={0}
       >
-        <Appbar.Content title="Expenses" color="black" />
+        <Appbar.Content
+          title={activeTab}
+          titleStyle={styles.heading}
+          color="black"
+        />
         <AppIconButton
           icon="menu"
           onPress={() => setNavOpen(!navOpen)}
@@ -33,49 +39,19 @@ const NavBar = ({ home, setActiveTab }) => {
           size={25}
         />
       </Appbar.Header>
-      {home && (
+      {expeseNav && (
         <View style={styles.homeNav}>
-          <Touchable
-            onPress={() => setActiveTab("shopping")}
-            style={styles.homeNavBtn}
-          >
-            <Text
-              style={{
-                color: "white",
-                fontWeight: "bold",
-                textAlign: "center",
-              }}
-            >
-              Shopping
-            </Text>
-          </Touchable>
           <Touchable
             onPress={() => setActiveTab("individual")}
             style={styles.homeNavBtn}
           >
-            <Text
-              style={{
-                color: "white",
-                fontWeight: "bold",
-                textAlign: "center",
-              }}
-            >
-              Individual
-            </Text>
+            <Text style={styles.text}>Individual</Text>
           </Touchable>
           <Touchable
             onPress={() => setActiveTab("groups")}
             style={styles.homeNavBtn}
           >
-            <Text
-              style={{
-                color: "white",
-                fontWeight: "bold",
-                textAlign: "center",
-              }}
-            >
-              Groups
-            </Text>
+            <Text style={styles.text}>Groups</Text>
           </Touchable>
         </View>
       )}
@@ -106,6 +82,14 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     marginHorizontal: 5,
     flex: 1,
+  },
+  heading: {
+    textTransform: "capitalize",
+  },
+  text: {
+    color: paperTheme.colors.iconColor,
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });
 export default NavBar;

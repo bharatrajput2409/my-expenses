@@ -6,18 +6,16 @@ import PersonalTab from "../personal/PersonalTab";
 import GroupsTab from "../groups/GroupsTab";
 import IndividualTab from "../individual/IndividualTab";
 import ShoppingTab from "../shopping/ShoppingTab";
+import { useSelector } from "react-redux";
 
 function Home(props) {
-  const [activeTab, setActiveTab] = useState("shopping");
+  const activeTab = useSelector((state) => state.ui.activeTab);
+  const expeseTab = useSelector((state) => state.ui.expeseTab);
+  console.log(expeseTab, activeTab);
   return (
-    <Screen
-      style={styles.root}
-      home={activeTab === "expense"}
-      setActiveTab={setActiveTab}
-      bottomNav
-    >
+    <Screen style={styles.root} expeseNav={activeTab === "expenses"} bottomNav>
       {activeTab === "shopping" && <ShoppingTab />}
-      {activeTab === "personal" && <PersonalTab />}
+      {/* {activeTab === "personal" && <PersonalTab />} */}
       {activeTab == "individual" && <IndividualTab />}
       {activeTab == "groups" && <GroupsTab />}
     </Screen>

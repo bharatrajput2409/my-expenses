@@ -12,5 +12,6 @@ export default paperTheme = {
     background: "rgba(0,0,0,0.1)",
     borderColor: "rgba(0,0,0,0.1)",
     lightGreen: "#a6e22e73",
+    iconColor: "rgba(0,0,0,0.8)",
   },
 };

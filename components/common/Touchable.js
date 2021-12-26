@@ -7,7 +7,7 @@ function Touchable({ children, onPress, style, ...others }) {
       rippleColor="rgba(0, 0, 0, .2)"
       onPress={onPress}
       style={[style]}
-      others
+      {...others}
     >
       {children}
     </TouchableRipple>
