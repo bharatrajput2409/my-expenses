@@ -27,7 +27,7 @@ const AppTextInput = ({
         activeOutlineColor={paperTheme.colors.lightPrimary}
         {...others}
       />
-      {error && <Text style={styles.error}>Error occured</Text>}
+      {error && <Text style={styles.error}>{error}</Text>}
     </View>
   );
 };

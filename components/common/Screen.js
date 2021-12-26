@@ -25,7 +25,7 @@ function Screen({
   bottomNav,
 }) {
   const [plusDialog, setplusDialog] = useState(false);
-  const addDialog = useSelector((state) => state.ui.addDialog);
+  const activeDialog = useSelector((state) => state.ui.activeDialog);
 
   return (
     <>
@@ -41,7 +41,7 @@ function Screen({
           <ScrollView style={styles.scrollView}>{children}</ScrollView>
         </Provider>
         {bottomNav && <BottomNav />}
-        {addDialog && <AddScreen />}
+        {activeDialog === "addNewStuffDialog" && <AddScreen />}
       </SafeAreaView>
     </>
   );

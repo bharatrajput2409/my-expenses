@@ -5,17 +5,23 @@ import Screen from "../common/Screen";
 import UserProfileNavBar from "../individual/UserProfileNav";
 import AppText from "../common/AppText";
 import paperTheme from "../../config/paperTheme";
+import { useRoute } from "@react-navigation/core";
+import { useSelector } from "react-redux";
 
 function IndividualUser(props) {
+  const route = useRoute();
+  const userId = route?.params?.userId;
+  const users = useSelector((state) => state.user.list);
+  const user = users.filter((user) => user.id === userId)[0];
   return (
-    <Screen style={styles.root} navBar={<UserProfileNavBar />}>
+    <Screen style={styles.root} navBar={<UserProfileNavBar user={user} />}>
       <PaymentCard
         borderBottom
-        left={<AppText>Recived form Ankit Gupta</AppText>}
+        left={<AppText>Recived form {user?.name}</AppText>}
         right={<AppText bold>$123</AppText>}
       />
       <PaymentCard
-        left={<AppText>Given to Ankit Gupta</AppText>}
+        left={<AppText>Given to {user?.name}</AppText>}
         right={<AppText bold>$123</AppText>}
         borderBottom
       />

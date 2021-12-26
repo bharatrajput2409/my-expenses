@@ -5,22 +5,21 @@ import Constants from "expo-constants";
 import { FontAwesome } from "@expo/vector-icons";
 
 import defaultStyle from "../../config/defaultStyle";
-import NavDrawer from "../common/navbar/NavDrawer";
 import AppIconButton from "../common/IconButton";
 import paperTheme from "../../config/paperTheme";
 import Paper from "../common/Paper";
+import { useNavigation } from "@react-navigation/core";
 
-const UserProfileNavBar = ({ home, setActiveTab }) => {
-  const statusBarHeight = Constants.statusBarHeight;
-  const [navOpen, setNavOpen] = React.useState(false);
+const UserProfileNavBar = ({ user }) => {
+  const navigation = useNavigation();
   const handleBack = () => {
-    console.log("going back...");
+    navigation.goBack();
   };
   return (
     <>
       <StatusBar
         backgroundColor={paperTheme.colors.lightPrimary}
-        barStyle="light-content"
+        barStyle="dark-content"
       />
       <Appbar.Header
         style={{
@@ -41,8 +40,7 @@ const UserProfileNavBar = ({ home, setActiveTab }) => {
           />
         </Paper>
         <View style={styles.right}>
-          <Text style={styles.username}>ankit gupta</Text>
-          <Text style={styles.relation}>friend</Text>
+          <Text style={styles.username}>{user?.name}</Text>
         </View>
         <View style={[styles.useraction]}>
           <AppIconButton
@@ -52,7 +50,6 @@ const UserProfileNavBar = ({ home, setActiveTab }) => {
           />
         </View>
       </View>
-      <NavDrawer open={navOpen} />
     </>
   );
 };
@@ -81,6 +78,8 @@ const styles = StyleSheet.create({
   },
   right: {
     flexGrow: 1,
+    justifyContent: "center",
+    marginBottom: 7,
   },
   username: {
     fontSize: 24,

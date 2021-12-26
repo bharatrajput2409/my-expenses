@@ -6,20 +6,19 @@ import AppText from "./AppText";
 import paperTheme from "../../config/paperTheme";
 import { List } from "react-native-paper";
 import { useDispatch } from "react-redux";
-import { UnSetAddDialog } from "../../store/ui";
+import { setActiveDialog, UnSetActiveDialog } from "../../store/ui";
 import Touchable from "./Touchable";
 
 function AddScreen(props) {
   const dispatch = useDispatch();
   const handleAddDialog = () => {
-    dispatch(UnSetAddDialog());
+    dispatch(UnSetActiveDialog());
   };
   const items = [
     {
       title: "New user",
       onPress: () => {
-        console.log("...");
-        handleAddDialog();
+        dispatch(setActiveDialog("newUser"));
       },
       icon: (props) => (
         <FontAwesome

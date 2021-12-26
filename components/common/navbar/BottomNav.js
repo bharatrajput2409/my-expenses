@@ -5,17 +5,33 @@ import { FontAwesome } from "@expo/vector-icons";
 import AppText from "../AppText";
 import paperTheme from "../../../config/paperTheme";
 import Touchable from "../Touchable";
-import { useDispatch } from "react-redux";
-import { setActiveTab, setAddDialog } from "../../../store/ui";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setActiveDialog,
+  setActiveTab,
+  UnSetActiveDialog,
+} from "../../../store/ui";
+import AppDialog from "../Dialog";
+import DialogActions from "../DialogActions";
+import { createUser, getUsers } from "../../../model/Users";
+import AppTextInput from "../AppTextInput";
+import Form from "../Form";
+import { fetchUsers } from "../../../store/users";
 
 function BottomNav() {
+  const [userName, setUserName] = React.useState("");
   const dispatch = useDispatch();
+  const activeDialog = useSelector((state) => state.ui.activeDialog);
   const handleAddDialog = () => {
-    dispatch(setAddDialog());
+    dispatch(setActiveDialog("addNewStuffDialog"));
+  };
+  const handleDialogClose = () => {
+    dispatch(setActiveDialog(""));
   };
   const handleTabChange = (tab) => () => {
     dispatch(setActiveTab(tab));
   };
+
   return (
     <View style={styles.root}>
       <Touchable
@@ -57,9 +73,66 @@ function BottomNav() {
           <Text style={styles.btnText}>Expenses</Text>
         </View>
       </Touchable>
+      <AppDialog
+        open={activeDialog === "newUser"}
+        setOpen={handleDialogClose}
+        title={"New user"}
+        content={<AddNewUserForm dispatch={dispatch} />}
+      />
     </View>
   );
 }
+
+function AddNewUserForm({ dispatch }) {
+  const handleSubmit = async (values) => {
+    if (!values.name) return;
+    let res = await createUser({ name: values.name, amount: 0 });
+    if (res) {
+      dispatch(fetchUsers());
+      dispatch(UnSetActiveDialog());
+    }
+  };
+  const validate = (values) => {
+    const errors = {};
+    if (!values.name) errors.name = "Name required";
+    return errors;
+  };
+  return (
+    <Form
+      onSubmit={handleSubmit}
+      initialValues={{ name: "" }}
+      validate={validate}
+    >
+      {({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        isSubmitting,
+      }) => (
+        <>
+          <AppTextInput
+            label="Name"
+            name="name"
+            onBlur={handleBlur}
+            value={values.name}
+            onChangeText={handleChange("name")}
+            error={errors.name && touched.name && errors.name}
+          />
+          <DialogActions
+            nextBtnTitle="Save"
+            onNext={handleSubmit}
+            dispatch={dispatch}
+            disabled={errors.name}
+          />
+        </>
+      )}
+    </Form>
+  );
+}
+
 const styles = StyleSheet.create({
   root: {
     position: "absolute",

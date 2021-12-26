@@ -2,9 +2,9 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Button } from "react-native-paper";
 
-function AppButton({ style, children, onPress }) {
+function AppButton({ style, children, onPress, ...rest }) {
   return (
-    <Button style={[styles.root, style]} onPress={onPress}>
+    <Button style={[styles.root, style]} onPress={onPress} {...rest}>
       {children}
     </Button>
   );

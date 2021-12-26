@@ -1,12 +1,10 @@
-// import db from "./db";
-
 import * as SQLite from "expo-sqlite";
 (async () => {
   console.log("create table if not exist");
   const db = SQLite.openDatabase("db.testDb");
   db.transaction((tx) => {
     tx.executeSql(
-      "CREATE TABLE IF NOT EXISTS shopping (id INTEGER PRIMARY KEY AUTOINCREMENT, list TEXT)"
+      "CREATE TABLE IF NOT EXISTS individualTranscation (id INTEGER PRIMARY KEY AUTOINCREMENT,user INTEGER, list TEXT)"
     ),
       null,
       (a, b) => {
@@ -15,13 +13,13 @@ import * as SQLite from "expo-sqlite";
   });
 })();
 
-export const createUser = (data) =>
+export const createTranscation = (userId, data) =>
   new Promise((resolve, reject) => {
     const db = SQLite.openDatabase("db.testDb");
     db.transaction((tx) => {
       tx.executeSql(
-        "INSERT INTO shopping (list) values (?)",
-        [JSON.stringify(data)],
+        "INSERT INTO individualTranscation (user,list) values (?,?)",
+        [userId, JSON.stringify(data)],
         (a, { rowsAffected }) => {
           resolve(rowsAffected);
         },

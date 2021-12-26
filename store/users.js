@@ -1,16 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getUsers } from "../model/Users";
 
 const initialState = {
   list: [],
   loading: true,
   lastFetch: null,
 };
-// user = {
-//   id: "unique id",
-//   name: "bharat singh",
-//   phone: "74270....",
-//   email: "bharatrajput2409@gmail.com",
-// };
 const slice = createSlice({
   name: "users",
   initialState: initialState,
@@ -24,3 +19,11 @@ const slice = createSlice({
     unSetLoading: (state) => void (state.loading = false),
   },
 });
+const { setUsers } = slice.actions;
+export const fetchUsers = () => async (dispatch) => {
+  let users = await getUsers();
+  dispatch(setUsers(users));
+};
+
+const user = slice.reducer;
+export default user;
