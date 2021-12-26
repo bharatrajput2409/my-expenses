@@ -10,7 +10,12 @@ import ShoppingTab from "../shopping/ShoppingTab";
 function Home(props) {
   const [activeTab, setActiveTab] = useState("shopping");
   return (
-    <Screen style={styles.root} home setActiveTab={setActiveTab}>
+    <Screen
+      style={styles.root}
+      home={activeTab === "expense"}
+      setActiveTab={setActiveTab}
+      bottomNav
+    >
       {activeTab === "shopping" && <ShoppingTab />}
       {activeTab === "personal" && <PersonalTab />}
       {activeTab == "individual" && <IndividualTab />}

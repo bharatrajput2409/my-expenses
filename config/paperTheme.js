@@ -6,9 +6,9 @@ export default paperTheme = {
   roundness: 2,
   colors: {
     ...DefaultTheme.colors,
-    primary: "#e34736",
+    primary: "#fad851",
     accent: "#aa3325",
-    lightPrimary: "#f443368a",
+    lightPrimary: "#fad851a6",
     background: "rgba(0,0,0,0.1)",
     borderColor: "rgba(0,0,0,0.1)",
     lightGreen: "#a6e22e73",

@@ -6,23 +6,14 @@ import Home from "./components/screens/Home";
 import IndividualUser from "./components/screens/IndividualUser";
 import ShoppingList from "./components/screens/ShoppingList";
 import theme from "./config/defaultStyle";
-
-const themePaper = {
-  ...DefaultTheme,
-  roundness: 2,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: theme.palette.primary,
-    accent: "blue",
-  },
-};
+import paperTheme from "./config/paperTheme";
 
 export default function App() {
   return (
-    <PaperProvider theme={themePaper}>
-      {/* <Home /> */}
+    <PaperProvider theme={paperTheme}>
+      <Home />
       {/* <IndividualUser /> */}
-      <ShoppingList />
+      {/* <ShoppingList /> */}
     </PaperProvider>
   );
 }

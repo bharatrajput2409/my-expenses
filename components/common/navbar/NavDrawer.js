@@ -2,17 +2,29 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import AppDrawer from "../Drawer";
 import { Drawer, Menu } from "react-native-paper";
+import { FontAwesome } from "@expo/vector-icons";
 
-function NavDrawer({ open, theme }) {
+function NavDrawer({ open, setNavOpen, setActiveTab }) {
   const [active, setActive] = React.useState(0);
   const navArray = [
     {
-      label: "Home",
-      icon: "home",
+      label: "Shopping",
+      icon: "cart",
+      onPress: () => setActiveTab("shopping"),
     },
     {
-      label: "Profile",
-      icon: "account",
+      label: "Expenses",
+      icon: (props) => {
+        return (
+          <FontAwesome
+            name="rupee"
+            size={props.size}
+            color={props.color}
+            style={{ marginLeft: 5, marginRight: 7 }}
+          />
+        );
+      },
+      onPress: () => setActiveTab("expense"),
     },
     {
       label: "Log out",
@@ -33,7 +45,11 @@ function NavDrawer({ open, theme }) {
             key={item.label}
             label={item.label}
             active={active === index}
-            onPress={() => setActive(index)}
+            onPress={() => {
+              item.onPress();
+              setActive(index);
+              setNavOpen(false);
+            }}
             icon={item.icon}
           />
         ))}

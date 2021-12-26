@@ -4,31 +4,37 @@ import { FontAwesome } from "@expo/vector-icons";
 
 import AppText from "../common/AppText";
 import paperTheme from "../../config/paperTheme";
+import Touchable from "../common/Touchable";
 
 function ShoppingListCard(props) {
   return (
-    <View style={styles.root}>
-      <View style={styles.left}>
-        <FontAwesome
-          name="shopping-cart"
-          size={32}
-          color={paperTheme.colors.primary}
-        />
-      </View>
-      <View style={styles.right}>
-        <View style={styles.top}>
-          <AppText bold size={16}>
-            Mangalore Shopping
-          </AppText>
+    <Touchable
+      onPress={() => console.log("openening shopping list...")}
+      style={{ marginVertical: 10 }}
+    >
+      <View style={styles.root}>
+        <View style={styles.left}>
+          <FontAwesome
+            name="shopping-cart"
+            size={32}
+            color={paperTheme.colors.primary}
+          />
         </View>
-        <View style={styles.bottom}>
-          <AppText style={styles.sampleItems}>Book,pen,table cover</AppText>
+        <View style={styles.right}>
+          <View style={styles.top}>
+            <AppText bold size={16}>
+              Mangalore Shopping
+            </AppText>
+          </View>
+          <View style={styles.bottom}>
+            <AppText style={styles.sampleItems}>Book,pen,table cover</AppText>
+          </View>
+        </View>
+        <View style={styles.itemscount}>
+          <AppText bold>12 Items</AppText>
         </View>
       </View>
-      <View style={styles.itemscount}>
-        <AppText bold>12 Items</AppText>
-      </View>
-    </View>
+    </Touchable>
   );
 }
 const styles = StyleSheet.create({
@@ -40,7 +46,6 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderStyle: "solid",
     borderBottomWidth: 1,
-    marginVertical: 10,
   },
   left: {
     justifyContent: "center",

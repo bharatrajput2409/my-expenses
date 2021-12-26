@@ -4,7 +4,7 @@ import { TouchableRipple } from "react-native-paper";
 function Touchable({ children, onPress, style, ...others }) {
   return (
     <TouchableRipple
-      rippleColor="rgba(0, 0, 0, .32)"
+      rippleColor="rgba(0, 0, 0, .2)"
       onPress={onPress}
       style={[style]}
       others

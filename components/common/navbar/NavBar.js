@@ -15,7 +15,7 @@ const NavBar = ({ home, setActiveTab }) => {
     <>
       <StatusBar
         backgroundColor={paperTheme.colors.lightPrimary}
-        barStyle="light-content"
+        barStyle="dark-content"
       />
       <Appbar.Header
         style={{
@@ -25,11 +25,11 @@ const NavBar = ({ home, setActiveTab }) => {
         }}
         statusBarHeight={0}
       >
-        <Appbar.Content title="Expenses" color="white" />
+        <Appbar.Content title="Expenses" color="black" />
         <AppIconButton
           icon="menu"
           onPress={() => setNavOpen(!navOpen)}
-          color="white"
+          color="black"
           size={25}
         />
       </Appbar.Header>
@@ -79,7 +79,11 @@ const NavBar = ({ home, setActiveTab }) => {
           </Touchable>
         </View>
       )}
-      <NavDrawer open={navOpen} />
+      <NavDrawer
+        open={navOpen}
+        setNavOpen={setNavOpen}
+        setActiveTab={setActiveTab}
+      />
     </>
   );
 };
@@ -90,7 +94,7 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
   },
   homeNav: {
-    backgroundColor: defaultStyle.palette.primary,
+    backgroundColor: paperTheme.colors.primary,
     display: "flex",
     flexDirection: "row",
     alignContent: "center",

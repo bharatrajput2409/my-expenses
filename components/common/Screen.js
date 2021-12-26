@@ -9,6 +9,7 @@ import AppFabs from "./Fabs";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import TouchableComponent from "./Touchable";
 import BackNav from "./navbar/BackNav";
+import BottomNav from "./navbar/BottomNav";
 function Screen({
   children,
   style,
@@ -18,6 +19,7 @@ function Screen({
   backNav,
   backAction,
   navTitle,
+  bottomNav,
 }) {
   return (
     <>
@@ -32,6 +34,7 @@ function Screen({
         <Provider>
           <ScrollView style={styles.scrollView}>{children}</ScrollView>
         </Provider>
+        {/* {bottomNav && <BottomNav setActiveTab={setActiveTab} />} */}
       </SafeAreaView>
     </>
   );
