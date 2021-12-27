@@ -6,7 +6,7 @@ import * as SQLite from "expo-sqlite";
   const db = SQLite.openDatabase("db.testDb");
   db.transaction((tx) => {
     tx.executeSql(
-      "CREATE TABLE IF NOT EXISTS shopping (id INTEGER PRIMARY KEY AUTOINCREMENT, list TEXT)"
+      "CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT, name varchar(50),amount integer)"
     ),
       null,
       (a, b) => {
@@ -17,11 +17,12 @@ import * as SQLite from "expo-sqlite";
 
 export const createUser = (data) =>
   new Promise((resolve, reject) => {
+    console.log(data);
     const db = SQLite.openDatabase("db.testDb");
     db.transaction((tx) => {
       tx.executeSql(
-        "INSERT INTO shopping (list) values (?)",
-        [JSON.stringify(data)],
+        "INSERT INTO user (name,amount) values (?,?)",
+        [data.name, 0],
         (a, { rowsAffected }) => {
           resolve(rowsAffected);
         },
@@ -38,16 +39,9 @@ export const getUsers = () =>
     const db = SQLite.openDatabase("db.testDb");
     db.transaction((tx) => {
       tx.executeSql(
-        "select * from  shopping",
+        "select * from  user",
         null,
         (txObj, { rows: { _array } }) => {
-          _array = _array.map((user) => {
-            let rest = JSON.parse(user.list);
-            return {
-              id: user.id,
-              ...rest,
-            };
-          });
           resolve(_array);
         },
         (txObj, error) => reject(error)

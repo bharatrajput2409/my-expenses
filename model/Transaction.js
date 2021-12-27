@@ -21,7 +21,16 @@ export const createTranscation = (userId, data) =>
         "INSERT INTO individualTranscation (user,list) values (?,?)",
         [userId, JSON.stringify(data)],
         (a, { rowsAffected }) => {
-          resolve(rowsAffected);
+          tx.executeSql(
+            "update user set amount= amount + ? where id = ?",
+            [data.amount, userId],
+            (a, { rowsAffected }) => {
+              resolve(rowsAffected);
+            },
+            (a, b) => {
+              reject(b);
+            }
+          );
         },
         (a, b) => {
           reject(b);
@@ -30,19 +39,20 @@ export const createTranscation = (userId, data) =>
     });
   });
 
-export const getUsers = () =>
+export const getTransactions = (userId) =>
   new Promise((resolve, reject) => {
     console.log("fetching...");
     const db = SQLite.openDatabase("db.testDb");
     db.transaction((tx) => {
       tx.executeSql(
-        "select * from  shopping",
-        null,
+        "select * from  individualTranscation where user = ?",
+        [userId],
         (txObj, { rows: { _array } }) => {
-          _array = _array.map((user) => {
-            let rest = JSON.parse(user.list);
+          _array = _array.map((txn) => {
+            let rest = JSON.parse(txn.list);
             return {
-              id: user.id,
+              id: txn.id,
+              user: txn.user,
               ...rest,
             };
           });

@@ -40,7 +40,7 @@ function BottomNav() {
       >
         <View style={styles.btnContainer}>
           <FontAwesome
-            name="home"
+            name="shopping-cart"
             size={24}
             color={paperTheme.colors.iconColor}
           />

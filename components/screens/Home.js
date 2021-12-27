@@ -16,8 +16,10 @@ function Home({ navigation, route }) {
     <Screen style={styles.root} expeseNav={activeTab === "expenses"} bottomNav>
       {activeTab === "shopping" && <ShoppingTab />}
       {/* {activeTab === "personal" && <PersonalTab />} */}
-      {expeseTab == "individual" && <IndividualTab />}
-      {expeseTab == "groups" && <GroupsTab />}
+      {expeseTab == "individual" && activeTab === "expenses" && (
+        <IndividualTab />
+      )}
+      {expeseTab == "groups" && activeTab === "expenses" && <GroupsTab />}
     </Screen>
   );
 }

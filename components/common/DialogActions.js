@@ -21,6 +21,8 @@ const styles = StyleSheet.create({
   root: {
     display: "flex",
     flexDirection: "row",
+    justifyContent: "flex-end",
+    marginTop: 10,
   },
 });
 export default DialogActions;

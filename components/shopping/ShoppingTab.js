@@ -2,6 +2,7 @@ import React from "react";
 import { Button, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 import { useSelector } from "react-redux";
+import { getTransactions } from "../../model/Transaction";
 import { createUser, deleteUser, getUsers } from "../../model/Users";
 import AppText from "../common/AppText";
 import ShoppingListCard from "./ShoppingListCard";
@@ -12,7 +13,7 @@ function ShoppingTab(props) {
       <AppText bold color="rgba(0,0,0,0.7)" style={styles.heading}>
         Shopping Lists
       </AppText>
-      <Button
+      {/* <Button
         title="get users"
         onPress={async () => {
           // let res = await createUser({
@@ -20,7 +21,7 @@ function ShoppingTab(props) {
           //   phone: "7427064864",
           // });
           // console.log(res);
-          let users = await getUsers();
+          let users = await getTransactions(17);
           console.log(users, "users");
         }}
       />
@@ -30,7 +31,7 @@ function ShoppingTab(props) {
           let users = await deleteUser(2);
           console.log(users, "users");
         }}
-      />
+      /> */}
       <ShoppingListCard />
       <ShoppingListCard />
     </View>

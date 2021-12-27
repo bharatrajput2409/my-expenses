@@ -1,9 +1,12 @@
 import * as React from "react";
 import { View } from "react-native";
 import { Dialog, Portal } from "react-native-paper";
+import { useDispatch } from "react-redux";
+import { UnSetActiveDialog } from "../../store/ui";
 
 const AppDialog = ({ open, setOpen, title, content, action }) => {
-  const hideDialog = () => setOpen(false);
+  const dispatch = useDispatch();
+  const hideDialog = () => dispatch(UnSetActiveDialog());
 
   return (
     <View>

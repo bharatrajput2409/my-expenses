@@ -6,40 +6,56 @@ import UserProfileNavBar from "../individual/UserProfileNav";
 import AppText from "../common/AppText";
 import paperTheme from "../../config/paperTheme";
 import { useRoute } from "@react-navigation/core";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTransaction } from "../../store/transaction";
 
 function IndividualUser(props) {
   const route = useRoute();
+  const dispatch = useDispatch();
   const userId = route?.params?.userId;
   const users = useSelector((state) => state.user.list);
   const user = users.filter((user) => user.id === userId)[0];
+  const transaction = useSelector((state) => state.transaction);
+  console.log(transaction);
+  React.useEffect(() => {
+    dispatch(fetchTransaction(user.id));
+  }, []);
+  const positivepayment = transaction.list.reduce(
+    (p, c) => (c.amount > 0 ? p + c.amount : p),
+    0
+  );
+  const negativepayment = transaction.list.reduce(
+    (p, c) => (c.amount < 0 ? p + c.amount : p),
+    0
+  );
   return (
     <Screen style={styles.root} navBar={<UserProfileNavBar user={user} />}>
       <PaymentCard
         borderBottom
         left={<AppText>Recived form {user?.name}</AppText>}
-        right={<AppText bold>$123</AppText>}
+        right={<AppText bold>₹{-negativepayment}</AppText>}
       />
       <PaymentCard
         left={<AppText>Given to {user?.name}</AppText>}
-        right={<AppText bold>$123</AppText>}
+        right={<AppText bold>₹{positivepayment}</AppText>}
         borderBottom
       />
       <PaymentCard
         left={<AppText>Total</AppText>}
-        right={<AppText bold>$0</AppText>}
+        right={<AppText bold>₹{positivepayment + negativepayment}</AppText>}
       />
       <AppText size={16} style={styles.heading}>
         Transactions
       </AppText>
-      <PaymentCard
-        left={
-          <Paragraph style={{ maxWidth: "80%" }}>
-            Samosa party payed by me.Samosa party payed by me
-          </Paragraph>
-        }
-        right={<AppText bold>$100</AppText>}
-      />
+      {transaction.list.map((txn) => (
+        <PaymentCard
+          key={txn.id}
+          left={
+            <Paragraph style={{ maxWidth: "80%" }}>{txn.comment}</Paragraph>
+          }
+          right={<AppText bold>₹{txn.amount}</AppText>}
+        />
+      ))}
     </Screen>
   );
 }
@@ -60,9 +76,7 @@ function PaymentCard({ left, right, borderTop, borderBottom }) {
 }
 
 const styles = StyleSheet.create({
-  root: {
-    backgroundColor: paperTheme.colors.background,
-  },
+  root: {},
   paymentCard: {
     display: "flex",
     padding: 15,

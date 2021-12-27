@@ -1,6 +1,6 @@
 import * as React from "react";
 import { StatusBar, StyleSheet, View } from "react-native";
-import { Appbar, Text } from "react-native-paper";
+import { Appbar, Checkbox, Text } from "react-native-paper";
 import Constants from "expo-constants";
 import { FontAwesome } from "@expo/vector-icons";
 
@@ -9,8 +9,21 @@ import AppIconButton from "../common/IconButton";
 import paperTheme from "../../config/paperTheme";
 import Paper from "../common/Paper";
 import { useNavigation } from "@react-navigation/core";
+import AppDialog from "../common/Dialog";
+import AppText from "../common/AppText";
+import AppTextInput from "../common/AppTextInput";
+import Form from "../common/Form";
+import DialogActions from "../common/DialogActions";
+import { useDispatch, useSelector } from "react-redux";
+import Touchable from "../common/Touchable";
+import { createTranscation } from "../../model/Transaction";
+import { setActiveDialog, UnSetActiveDialog } from "../../store/ui";
+import { fetchTransaction } from "../../store/transaction";
+import { fetchUsers } from "../../store/users";
 
 const UserProfileNavBar = ({ user }) => {
+  const dispatch = useDispatch();
+  const activeDialog = useSelector((state) => state.ui.activeDialog);
   const navigation = useNavigation();
   const handleBack = () => {
     navigation.goBack();
@@ -44,15 +57,134 @@ const UserProfileNavBar = ({ user }) => {
         </View>
         <View style={[styles.useraction]}>
           <AppIconButton
+            icon="plus"
+            onPress={() => dispatch(setActiveDialog("addAmount"))}
+            size={30}
+          />
+          <AppIconButton
             icon="delete"
             onPress={() => console.log("delete user...")}
             size={30}
           />
         </View>
       </View>
+      <AppDialog
+        title="Add amount"
+        open={activeDialog === "addAmount"}
+        content={<AddAmountForm user={user} dispatch={dispatch} />}
+      />
     </>
   );
 };
+
+function AddAmountForm({ dispatch, user }) {
+  console.log(user, "add trax");
+  const handleSubmit = async (values, b) => {
+    if (!values.amount) return;
+    let res = await createTranscation(values.userId, {
+      amount: values.txnWay * values.amount,
+      comment: values.comment,
+      date: Date.now(),
+    });
+    console.log(res, "txn");
+    if (res) {
+      dispatch(fetchTransaction(user.id));
+      dispatch(UnSetActiveDialog());
+      dispatch(fetchUsers());
+    }
+  };
+  const validate = (values) => {
+    const errors = {};
+    if (!values.amount) errors.amount = "Amount required";
+    if (!values.comment) errors.comment = "Comment required";
+    return errors;
+  };
+  return (
+    <View style={styles.addamountroot}>
+      <Form
+        onSubmit={handleSubmit}
+        initialValues={{ amount: "", txnWay: 1, comment: "", userId: user.id }}
+        validate={validate}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+          setFieldValue,
+        }) => (
+          <>
+            <AppTextInput
+              label="Amount"
+              name="amount"
+              onBlur={handleBlur("amount")}
+              value={values.amount}
+              onChangeText={handleChange("amount")}
+              error={errors.amount && touched.amount && errors.amount}
+              keyboardType="numeric"
+              maxLength={7}
+            />
+            <AppTextInput
+              label="Comment"
+              name="comment"
+              onBlur={handleBlur("comment")}
+              value={values.comment}
+              onChangeText={handleChange("comment")}
+              error={errors.comment && touched.comment && errors.comment}
+            />
+            <View style={styles.txnWayWrapper}>
+              <Touchable
+                style={[
+                  styles.checkBoxContainer,
+                  values.txnWay === 1 && styles.checkBoxContainerSelected,
+                ]}
+                onPress={() => {
+                  setFieldValue("txnWay", 1);
+                }}
+              >
+                <AppText
+                  style={
+                    values.txnWay === 1 && { color: paperTheme.colors.primary }
+                  }
+                >
+                  Given to {user?.name}
+                </AppText>
+              </Touchable>
+            </View>
+            <View style={styles.txnWayWrapper}>
+              <Touchable
+                style={[
+                  styles.checkBoxContainer,
+                  values.txnWay === -1 && styles.checkBoxContainerSelected,
+                ]}
+                onPress={() => {
+                  setFieldValue("txnWay", -1);
+                }}
+              >
+                <AppText
+                  style={
+                    values.txnWay === -1 && { color: paperTheme.colors.primary }
+                  }
+                >
+                  Taken from {user?.name}
+                </AppText>
+              </Touchable>
+            </View>
+            <DialogActions
+              nextBtnTitle="Save"
+              onNext={handleSubmit}
+              dispatch={dispatch}
+              disabled={errors.name}
+            />
+          </>
+        )}
+      </Form>
+    </View>
+  );
+}
 const styles = StyleSheet.create({
   root: {},
   btn: {
@@ -93,14 +225,35 @@ const styles = StyleSheet.create({
   },
   useraction: {
     height: 60,
-    borderRadius: 500,
-    width: 60,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 7,
     marginLeft: 15,
     marginRight: 10,
     elevation: 0,
+    display: "flex",
+    flexDirection: "row",
+  },
+  checkBoxContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+    borderRadius: 20,
+    justifyContent: "center",
+    borderWidth: 2,
+    borderStyle: "solid",
+    borderColor: paperTheme.colors.borderColor,
+  },
+  checkBoxContainerSelected: {
+    // backgroundColor: paperTheme.colors.primary,
+    borderColor: paperTheme.colors.primary,
+  },
+  txnWayWrapper: {
+    marginTop: 5,
+    overflow: "hidden",
+    borderRadius: 20,
+    backgroundColor: "white",
   },
 });
 export default UserProfileNavBar;

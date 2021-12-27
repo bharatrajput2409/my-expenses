@@ -7,7 +7,6 @@ import UserCard from "./UserCard";
 
 function IndividualTab(props) {
   const users = useSelector((state) => state.user);
-  console.log(users, "users");
   return (
     <View style={styles.root}>
       <AppText bold padding={10}>
