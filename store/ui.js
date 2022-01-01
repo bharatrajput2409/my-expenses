@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  activeTab: "shopping",
+  activeTab: "expenses",
   expeseTab: "individual",
   activeDialog: "",
 };
@@ -13,11 +13,16 @@ const slice = createSlice({
       void (state.activeDialog = action.payload),
     UnSetActiveDialog: (state, action) => void (state.activeDialog = false),
     setActiveTab: (state, action) => void (state.activeTab = action.payload),
+    setExpenseTab: (state, action) => void (state.expeseTab = action.payload),
   },
 });
 
-export const { setActiveTab, setActiveDialog, UnSetActiveDialog } =
-  slice.actions;
+export const {
+  setActiveTab,
+  setActiveDialog,
+  UnSetActiveDialog,
+  setExpenseTab,
+} = slice.actions;
 
 const ui = slice.reducer;
 export default ui;

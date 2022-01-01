@@ -5,11 +5,13 @@ import { FontAwesome } from "@expo/vector-icons";
 import AppText from "../common/AppText";
 import paperTheme from "../../config/paperTheme";
 import Touchable from "../common/Touchable";
+import { useNavigation } from "@react-navigation/core";
 
-function ShoppingListCard(props) {
+function ShoppingListCard({ data }) {
+  const navigator = useNavigation();
   return (
     <Touchable
-      onPress={() => console.log("openening shopping list...")}
+      onPress={() => navigator.navigate("shoppingPage", { id: data.id })}
       style={{ marginVertical: 10 }}
     >
       <View style={styles.root}>
@@ -23,7 +25,7 @@ function ShoppingListCard(props) {
         <View style={styles.right}>
           <View style={styles.top}>
             <AppText bold size={16}>
-              Mangalore Shopping
+              {data?.name}
             </AppText>
           </View>
           <View style={styles.bottom}>
@@ -31,7 +33,7 @@ function ShoppingListCard(props) {
           </View>
         </View>
         <View style={styles.itemscount}>
-          <AppText bold>12 Items</AppText>
+          <AppText bold>{data?.items?.length} Items</AppText>
         </View>
       </View>
     </Touchable>

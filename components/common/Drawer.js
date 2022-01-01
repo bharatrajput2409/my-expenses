@@ -21,13 +21,13 @@ function Drawer({ children, right, style, open }) {
       <View style={[styles.companyDetails]}>
         <Headline
           style={{
-            color: "black",
+            color: "white",
             fontWeight: "bold",
             fontSize: 21,
             paddingLeft: 20,
           }}
         >
-          Explid
+          My Expenses
         </Headline>
       </View>
       {children}

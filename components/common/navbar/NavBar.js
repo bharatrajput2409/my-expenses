@@ -7,17 +7,22 @@ import NavDrawer from "./NavDrawer";
 import AppIconButton from "../IconButton";
 import Touchable from "../Touchable";
 import paperTheme from "../../../config/paperTheme";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setExpenseTab } from "../../../store/ui";
 
 const NavBar = ({ expeseNav, setActiveTab }) => {
+  const dispatch = useDispatch();
   const statusBarHeight = Constants.statusBarHeight;
   const [navOpen, setNavOpen] = React.useState(false);
   const activeTab = useSelector((state) => state.ui.activeTab);
+  const handleTab = (tab) => () => {
+    dispatch(setExpenseTab(tab));
+  };
   return (
     <>
       <StatusBar
         backgroundColor={paperTheme.colors.lightPrimary}
-        barStyle="dark-content"
+        barStyle="light-content"
       />
       <Appbar.Header
         style={{
@@ -30,27 +35,24 @@ const NavBar = ({ expeseNav, setActiveTab }) => {
         <Appbar.Content
           title={activeTab}
           titleStyle={styles.heading}
-          color="black"
+          color="white"
         />
         <AppIconButton
           icon="menu"
           onPress={() => setNavOpen(!navOpen)}
-          color="black"
+          color="white"
           size={25}
         />
       </Appbar.Header>
       {expeseNav && (
         <View style={styles.homeNav}>
           <Touchable
-            onPress={() => setActiveTab("individual")}
+            onPress={handleTab("individual")}
             style={styles.homeNavBtn}
           >
             <Text style={styles.text}>Individual</Text>
           </Touchable>
-          <Touchable
-            onPress={() => setActiveTab("groups")}
-            style={styles.homeNavBtn}
-          >
+          <Touchable onPress={handleTab("groups")} style={styles.homeNavBtn}>
             <Text style={styles.text}>Groups</Text>
           </Touchable>
         </View>
@@ -87,7 +89,7 @@ const styles = StyleSheet.create({
     textTransform: "capitalize",
   },
   text: {
-    color: paperTheme.colors.iconColor,
+    color: "white",
     fontWeight: "bold",
     textAlign: "center",
   },

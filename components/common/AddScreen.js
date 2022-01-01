@@ -30,21 +30,23 @@ function AddScreen(props) {
       ),
     },
 
-    {
-      title: "New group",
-      onPress: () => console.log("..."),
-      icon: (props) => (
-        <FontAwesome
-          name="plus"
-          style={[props.style, styles.icon]}
-          color={props.color}
-          size={20}
-        />
-      ),
-    },
+    // {
+    //   title: "New group",
+    //   onPress: () => console.log("..."),
+    //   icon: (props) => (
+    //     <FontAwesome
+    //       name="plus"
+    //       style={[props.style, styles.icon]}
+    //       color={props.color}
+    //       size={20}
+    //     />
+    //   ),
+    // },
     {
       title: "New shopping list",
-      onPress: () => console.log("..."),
+      onPress: () => {
+        dispatch(setActiveDialog("newShopping"));
+      },
       icon: (props) => (
         <FontAwesome
           name="cart-plus"
@@ -93,7 +95,7 @@ const styles = StyleSheet.create({
     zIndex: 1000,
   },
   addCard: {
-    backgroundColor: "white",
+    backgroundColor: paperTheme.colors.background,
     paddingHorizontal: 20,
   },
   title: {

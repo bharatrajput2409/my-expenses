@@ -17,6 +17,8 @@ import { createUser, getUsers } from "../../../model/Users";
 import AppTextInput from "../AppTextInput";
 import Form from "../Form";
 import { fetchUsers } from "../../../store/users";
+import { createShopping } from "../../../model/shopping";
+import { fetchShopping } from "../../../store/shopping";
 
 function BottomNav() {
   const [userName, setUserName] = React.useState("");
@@ -35,16 +37,16 @@ function BottomNav() {
   return (
     <View style={styles.root}>
       <Touchable
-        onPress={handleTabChange("shopping")}
+        onPress={handleTabChange("expenses")}
         style={styles.homeNavBtn}
       >
         <View style={styles.btnContainer}>
           <FontAwesome
-            name="shopping-cart"
+            name="money"
             size={24}
             color={paperTheme.colors.iconColor}
           />
-          <Text style={styles.btnText}>Shopping</Text>
+          <Text style={styles.btnText}>Expenses</Text>
         </View>
       </Touchable>
       <View style={[styles.homeNavBtn, { paddingVertical: 0 }]}>
@@ -61,23 +63,30 @@ function BottomNav() {
         </View>
       </View>
       <Touchable
-        onPress={handleTabChange("expenses")}
+        onPress={handleTabChange("shopping")}
         style={styles.homeNavBtn}
       >
         <View style={styles.btnContainer}>
           <FontAwesome
-            name="money"
+            name="shopping-cart"
             size={24}
             color={paperTheme.colors.iconColor}
           />
-          <Text style={styles.btnText}>Expenses</Text>
+          <Text style={styles.btnText}>Shopping</Text>
         </View>
       </Touchable>
+
       <AppDialog
         open={activeDialog === "newUser"}
         setOpen={handleDialogClose}
         title={"New user"}
         content={<AddNewUserForm dispatch={dispatch} />}
+      />
+      <AppDialog
+        open={activeDialog === "newShopping"}
+        setOpen={handleDialogClose}
+        title={"New shopping list"}
+        content={<AddNewShoppingForm dispatch={dispatch} />}
       />
     </View>
   );
@@ -89,6 +98,55 @@ function AddNewUserForm({ dispatch }) {
     let res = await createUser({ name: values.name, amount: 0 });
     if (res) {
       dispatch(fetchUsers());
+      dispatch(UnSetActiveDialog());
+    }
+  };
+  const validate = (values) => {
+    const errors = {};
+    if (!values.name) errors.name = "Name required";
+    return errors;
+  };
+  return (
+    <Form
+      onSubmit={handleSubmit}
+      initialValues={{ name: "" }}
+      validate={validate}
+    >
+      {({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        isSubmitting,
+      }) => (
+        <>
+          <AppTextInput
+            label="Name"
+            name="name"
+            onBlur={handleBlur}
+            value={values.name}
+            onChangeText={handleChange("name")}
+            error={errors.name && touched.name && errors.name}
+          />
+          <DialogActions
+            nextBtnTitle="Save"
+            onNext={handleSubmit}
+            dispatch={dispatch}
+            disabled={errors.name}
+          />
+        </>
+      )}
+    </Form>
+  );
+}
+function AddNewShoppingForm({ dispatch }) {
+  const handleSubmit = async (values) => {
+    if (!values.name) return;
+    let res = await createShopping(values.name, []);
+    if (res) {
+      dispatch(fetchShopping());
       dispatch(UnSetActiveDialog());
     }
   };

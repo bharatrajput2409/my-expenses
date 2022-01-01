@@ -14,6 +14,7 @@ import paperTheme from "./config/paperTheme";
 import db from "./model/db";
 import store from "./store/store";
 import { fetchUsers } from "./store/users";
+import AboutDeveloper from "./components/AboutDeveloper";
 
 export default function App() {
   return (
@@ -39,7 +40,9 @@ function StackNavigation() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="shopping" component={Home} />
+      <Stack.Screen name="aboutUs" component={AboutDeveloper} />
       <Stack.Screen name="individualUser" component={IndividualUser} />
+      <Stack.Screen name="shoppingPage" component={IndividualUser} />
     </Stack.Navigator>
   );
 }
