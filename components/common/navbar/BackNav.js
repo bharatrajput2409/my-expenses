@@ -8,7 +8,7 @@ import AppIconButton from "../IconButton";
 import Touchable from "../Touchable";
 import paperTheme from "../../../config/paperTheme";
 
-const BackNav = ({ backAction, title }) => {
+const BackNav = ({ backAction, title, actions }) => {
   const statusBarHeight = Constants.statusBarHeight;
   return (
     <>
@@ -20,7 +20,8 @@ const BackNav = ({ backAction, title }) => {
         style={{
           backgroundColor: paperTheme.colors.primary,
           height: defaultStyle.toolbar.nav.height,
-          elevation: 0,
+          // elevation: 0,
+          overflow: "visible",
         }}
         statusBarHeight={0}
       >
@@ -35,6 +36,7 @@ const BackNav = ({ backAction, title }) => {
           title={title}
           color="white"
         />
+        {actions && actions.map((action) => action)}
       </Appbar.Header>
     </>
   );

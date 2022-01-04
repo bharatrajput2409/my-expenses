@@ -2,7 +2,7 @@ import React from "react";
 import { Button, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
-import { getShopping } from "../../model/shopping";
+import { deleteShopping, getShopping } from "../../model/shopping";
 import { getTransactions } from "../../model/Transaction";
 import { createUser, deleteUser, getUsers } from "../../model/Users";
 import { fetchShopping } from "../../store/shopping";
@@ -15,6 +15,7 @@ function ShoppingTab(props) {
   React.useEffect(() => {
     dispatch(fetchShopping());
   }, []);
+  console.log(shopping, "shopping");
   return (
     <View style={styles.root}>
       <AppText bold color="rgba(0,0,0,0.7)" style={styles.heading}>
@@ -35,7 +36,7 @@ function ShoppingTab(props) {
       <Button
         title="delete user"
         onPress={async () => {
-          let users = await deleteUser(2);
+          let users = await deleteShopping(1);
           console.log(users, "users");
         }}
       /> */}

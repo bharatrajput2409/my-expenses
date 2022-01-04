@@ -42,7 +42,7 @@ function StackNavigation() {
       <Stack.Screen name="shopping" component={Home} />
       <Stack.Screen name="aboutUs" component={AboutDeveloper} />
       <Stack.Screen name="individualUser" component={IndividualUser} />
-      <Stack.Screen name="shoppingPage" component={IndividualUser} />
+      <Stack.Screen name="shoppingPage" component={ShoppingList} />
     </Stack.Navigator>
   );
 }

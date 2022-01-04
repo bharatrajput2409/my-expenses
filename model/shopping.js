@@ -30,6 +30,53 @@ export const createShopping = (name, data) =>
     });
   });
 
+export const insertItem = (restItems, data) =>
+  new Promise((resolve, reject) => {
+    console.log(restItems, data);
+    const db = SQLite.openDatabase("db.testDb");
+    db.transaction((tx) => {
+      tx.executeSql(
+        "update shopping set items = ? where id = ?",
+        [
+          JSON.stringify([
+            {
+              name: data.name,
+              quantity: data.quantity,
+              price: 0,
+              bought: 0,
+              comment: data.comment,
+            },
+            ...restItems,
+          ]),
+          data.id,
+        ],
+        (a, { rowsAffected }) => {
+          resolve(rowsAffected);
+        },
+        (a, b) => {
+          reject(b);
+        }
+      );
+    });
+  });
+
+export const resetItems = (id) =>
+  new Promise((resolve, reject) => {
+    const db = SQLite.openDatabase("db.testDb");
+    db.transaction((tx) => {
+      tx.executeSql(
+        "update shopping set items = ? where id = ?",
+        [JSON.stringify([]), id],
+        (a, { rowsAffected }) => {
+          resolve(rowsAffected);
+        },
+        (a, b) => {
+          reject(b);
+        }
+      );
+    });
+  });
+
 export const getShopping = () =>
   new Promise((resolve, reject) => {
     console.log("fetching... shopping");
@@ -54,7 +101,7 @@ export const getShopping = () =>
     });
   });
 
-export const deleteUser = (id) =>
+export const deleteShopping = (id) =>
   new Promise((resolve, reject) => {
     console.log("fetching...");
     const db = SQLite.openDatabase("db.testDb");

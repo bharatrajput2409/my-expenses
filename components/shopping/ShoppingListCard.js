@@ -12,7 +12,7 @@ function ShoppingListCard({ data }) {
   return (
     <Touchable
       onPress={() => navigator.navigate("shoppingPage", { id: data.id })}
-      style={{ marginVertical: 10 }}
+      style={{ marginVertical: 10, backgroundColor: "white", elevation: 5 }}
     >
       <View style={styles.root}>
         <View style={styles.left}>
@@ -41,15 +41,15 @@ function ShoppingListCard({ data }) {
 }
 const styles = StyleSheet.create({
   root: {
-    backgroundColor: "white",
+    // backgroundColor: "white",
     display: "flex",
     flexDirection: "row",
     padding: 10,
     borderColor: paperTheme.colors.borderColor,
-    borderTopWidth: 1,
+    // borderTopWidth: 1,
     borderStyle: "solid",
-    borderBottomWidth: 1,
-    elevation: 1,
+    // borderBottomWidth: 1,
+    elevation: 0,
   },
   left: {
     justifyContent: "center",

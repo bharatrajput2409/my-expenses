@@ -6,12 +6,12 @@ export default paperTheme = {
   roundness: 2,
   colors: {
     ...DefaultTheme.colors,
-    primary: "#2196f3",
+    primary: "#f44336",
     accent: "#aa3325",
-    lightPrimary: "#64b5f6",
+    lightPrimary: "#f44336",
     background: "#eeeefd",
     borderColor: "rgba(0,0,0,0.1)",
-    lightGreen: "#a6e22e73",
+    lightGreen: "rgba(0,255,0,.1)",
     iconColor: "rgba(0,0,0,0.8)",
   },
 };

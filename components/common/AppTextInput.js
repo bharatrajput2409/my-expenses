@@ -19,6 +19,7 @@ const AppTextInput = ({
         value={value}
         onChangeText={onChangeText}
         mode="outlined"
+        name={name}
         theme={paperTheme}
         error={Boolean(error)}
         style={styles.input}

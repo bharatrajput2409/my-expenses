@@ -23,6 +23,7 @@ function Screen({
   backAction,
   navTitle,
   bottomNav,
+  actions,
 }) {
   const [plusDialog, setplusDialog] = useState(false);
   const activeDialog = useSelector((state) => state.ui.activeDialog);
@@ -36,7 +37,9 @@ function Screen({
           ) : (
             <NavBar expeseNav={expeseNav} setActiveTab={setActiveTab} />
           ))}
-        {backNav && <BackNav backAction={backAction} title={navTitle} />}
+        {backNav && (
+          <BackNav backAction={backAction} actions={actions} title={navTitle} />
+        )}
         <Provider>
           <ScrollView style={styles.scrollView}>{children}</ScrollView>
         </Provider>
