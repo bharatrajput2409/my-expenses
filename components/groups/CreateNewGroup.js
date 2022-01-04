@@ -14,7 +14,6 @@ function CreateNewGroup(props) {
     setForm({ ...form, member: "" });
   };
   const handleForm = (name) => (value) => {
-    console.log(name, value);
     setForm({ ...form, [name]: value });
   };
   return (

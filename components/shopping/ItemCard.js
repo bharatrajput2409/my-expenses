@@ -5,8 +5,12 @@ import AppText from "../common/AppText";
 import AppIconButton from "../common/IconButton";
 import paperTheme from "../../config/paperTheme";
 import AppMenu from "../common/Menu";
+import { deleteItem } from "../../model/shopping";
+import { useDispatch } from "react-redux";
+import { fetchShopping } from "../../store/shopping";
 
-function ItemCard({ data }) {
+function ItemCard({ data, handleDelete, handleBought }) {
+  console.log(data.bought, "data");
   const style = {
     root: {
       backgroundColor: "white",
@@ -19,26 +23,27 @@ function ItemCard({ data }) {
     // style.itemname.color = paperTheme.colors.greenText;
     // style.qty.color = paperTheme.colors.greenText;
   }
-  const menuItems = [
+  let menuItems = [
     {
       title: "Bought",
       icon: ({ color, size }) => (
         <MaterialIcons name="done" size={size} color={color} />
       ),
-      onPress: () => console.log("add items"),
+      onPress: handleBought(data.id),
     },
     {
       title: "Delete",
       icon: "delete",
-      onPress: () => console.log("add items"),
+      onPress: handleDelete(data.id),
     },
   ];
+  if (data.bought) menuItems = [menuItems[1]];
   return (
-    <View style={[, styles.root, style.root]}>
+    <View style={[styles.root, style.root]}>
       <View style={styles.left}>
         <AppText style={[styles.itemname, style.itemname]}>{data.name}</AppText>
         <AppText style={[styles.qty, style.qty]}>
-          Quantity: {data.quantity}
+          Quantity: {data.quantity} {data?.prize && `-> ₹ ${data?.prize}`}
         </AppText>
       </View>
       <View style={styles.right}>
@@ -78,10 +83,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingHorizontal: 15,
     borderColor: paperTheme.colors.borderColor,
-
     marginVertical: 3,
     paddingVertical: 5,
-    elevation: 5,
+    elevation: 0,
   },
   left: {
     flexGrow: 1,

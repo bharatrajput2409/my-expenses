@@ -4,40 +4,40 @@ import { Dialog, Portal } from "react-native-paper";
 import { useDispatch } from "react-redux";
 import { UnSetActiveDialog } from "../../store/ui";
 import paperTheme from "../../config/paperTheme";
+import AppText from "./AppText";
 
 const AppDialog = ({ open, setOpen, title, content, action }) => {
   const dispatch = useDispatch();
   const hideDialog = () => dispatch(UnSetActiveDialog());
 
   return (
-    <View>
-      <Portal>
-        <Dialog
-          visible={open}
-          style={{
-            position: "relative",
-            overflow: "hidden",
-          }}
-          onDismiss={hideDialog}
-        >
-          <View style={styles.topborder}></View>
-          <Dialog.Title>{title}</Dialog.Title>
+    <Portal>
+      <Dialog visible={open} style={styles.root} onDismiss={hideDialog}>
+        <AppText bold padding={[10, 10, 10, 20]} color="white" size={20}>
+          {title}
+        </AppText>
+        <View style={styles.container}>
           <Dialog.Content>{content}</Dialog.Content>
           <Dialog.Actions>{action}</Dialog.Actions>
-        </Dialog>
-      </Portal>
-    </View>
+        </View>
+      </Dialog>
+    </Portal>
   );
 };
 
 const styles = StyleSheet.create({
-  topborder: {
-    position: "absolute",
+  root: {
+    position: "relative",
+    overflow: "hidden",
     backgroundColor: paperTheme.colors.primary,
-    height: 7,
-    top: 0,
-    left: 0,
-    right: 0,
+    elevation: 5,
+    borderRadius: 10,
+  },
+  container: {
+    backgroundColor: "white",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    elevation: 10,
   },
 });
 

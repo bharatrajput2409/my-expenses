@@ -78,7 +78,6 @@ const UserProfileNavBar = ({ user }) => {
 };
 
 function AddAmountForm({ dispatch, user }) {
-  console.log(user, "add trax");
   const handleSubmit = async (values, b) => {
     if (!values.amount) return;
     let res = await createTranscation(values.userId, {
@@ -86,7 +85,6 @@ function AddAmountForm({ dispatch, user }) {
       comment: values.comment,
       date: Date.now(),
     });
-    console.log(res, "txn");
     if (res) {
       dispatch(fetchTransaction(user.id));
       dispatch(UnSetActiveDialog());

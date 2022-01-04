@@ -4,13 +4,23 @@ import AppButton from "./AppButton";
 import { useDispatch } from "react-redux";
 import { UnSetActiveDialog } from "../../store/ui";
 
-function DialogActions({ onNext, nextBtnTitle, dispatch, disabled }) {
+function DialogActions({
+  onNext,
+  nextBtnTitle,
+  dispatch,
+  disabled,
+  negativeBtnTitle,
+  onCancle,
+}) {
   const handleClose = () => {
+    if (onCancle) onCancle();
     dispatch(UnSetActiveDialog());
   };
   return (
     <View style={styles.root}>
-      <AppButton onPress={handleClose}>Cancle</AppButton>
+      <AppButton onPress={handleClose}>
+        {negativeBtnTitle || "Cancle"}
+      </AppButton>
       <AppButton onPress={onNext} disabled={disabled}>
         {nextBtnTitle}
       </AppButton>

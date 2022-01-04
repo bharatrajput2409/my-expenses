@@ -26,6 +26,5 @@ const transaction = slice.reducer;
 export default transaction;
 export const fetchTransaction = (userId) => async (dispatch) => {
   let txn = await getTransactions(userId);
-  console.log(txn, "txn-store");
   dispatch(setTransaction(txn));
 };

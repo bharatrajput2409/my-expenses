@@ -15,7 +15,6 @@ function ShoppingTab(props) {
   React.useEffect(() => {
     dispatch(fetchShopping());
   }, []);
-  console.log(shopping, "shopping");
   return (
     <View style={styles.root}>
       <AppText bold color="rgba(0,0,0,0.7)" style={styles.heading}>

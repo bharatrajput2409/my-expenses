@@ -1,6 +1,5 @@
 import * as SQLite from "expo-sqlite";
 (async () => {
-  console.log("create table shopping if not exist");
   const db = SQLite.openDatabase("db.testDb");
   db.transaction((tx) => {
     tx.executeSql(
@@ -32,7 +31,6 @@ export const createShopping = (name, data) =>
 
 export const insertItem = (restItems, data) =>
   new Promise((resolve, reject) => {
-    console.log(restItems, data);
     const db = SQLite.openDatabase("db.testDb");
     db.transaction((tx) => {
       tx.executeSql(
@@ -40,6 +38,7 @@ export const insertItem = (restItems, data) =>
         [
           JSON.stringify([
             {
+              id: Date.now(),
               name: data.name,
               quantity: data.quantity,
               price: 0,
@@ -49,6 +48,50 @@ export const insertItem = (restItems, data) =>
             ...restItems,
           ]),
           data.id,
+        ],
+        (a, { rowsAffected }) => {
+          resolve(rowsAffected);
+        },
+        (a, b) => {
+          reject(b);
+        }
+      );
+    });
+  });
+
+export const deleteItem = (restItems, shoppingId, itemId) =>
+  new Promise((resolve, reject) => {
+    const db = SQLite.openDatabase("db.testDb");
+    db.transaction((tx) => {
+      tx.executeSql(
+        "update shopping set items = ? where id = ?",
+        [
+          JSON.stringify(restItems.filter((item) => item.id !== itemId)),
+          shoppingId,
+        ],
+        (a, { rowsAffected }) => {
+          resolve(rowsAffected);
+        },
+        (a, b) => {
+          reject(b);
+        }
+      );
+    });
+  });
+export const itemBought = (restItems, shoppingId, itemId, prize) =>
+  new Promise((resolve, reject) => {
+    const db = SQLite.openDatabase("db.testDb");
+    console.log(restItems, "rest items");
+    db.transaction((tx) => {
+      tx.executeSql(
+        "update shopping set items = ? where id = ?",
+        [
+          JSON.stringify(
+            restItems.map((item) =>
+              item.id === itemId ? { ...item, bought: 1, prize } : item
+            )
+          ),
+          shoppingId,
         ],
         (a, { rowsAffected }) => {
           resolve(rowsAffected);
@@ -79,11 +122,10 @@ export const resetItems = (id) =>
 
 export const getShopping = () =>
   new Promise((resolve, reject) => {
-    console.log("fetching... shopping");
     const db = SQLite.openDatabase("db.testDb");
     db.transaction((tx) => {
       tx.executeSql(
-        "select * from  shopping",
+        "select * from  shopping order by id desc",
         null,
         (txObj, { rows: { _array } }) => {
           _array = _array.map((item) => {
@@ -103,7 +145,6 @@ export const getShopping = () =>
 
 export const deleteShopping = (id) =>
   new Promise((resolve, reject) => {
-    console.log("fetching...");
     const db = SQLite.openDatabase("db.testDb");
     db.transaction((tx) => {
       tx.executeSql(

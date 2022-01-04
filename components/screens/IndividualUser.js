@@ -16,7 +16,6 @@ function IndividualUser(props) {
   const users = useSelector((state) => state.user.list);
   const user = users.filter((user) => user.id === userId)[0];
   const transaction = useSelector((state) => state.transaction);
-  console.log(transaction);
   React.useEffect(() => {
     dispatch(fetchTransaction(user.id));
   }, []);

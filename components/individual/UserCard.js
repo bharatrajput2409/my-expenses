@@ -13,7 +13,6 @@ function UserCard({ data }) {
   const handleNavigation = (userId) => () => {
     navigator.navigate("individualUser", { userId });
   };
-  console.log(data, "data");
   return (
     <Touchable style={styles.root} onPress={handleNavigation(data.id)}>
       <>

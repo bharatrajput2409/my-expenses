@@ -6,6 +6,10 @@ import AppIconButton from "./IconButton";
 function AppMenu({ icon, items, color }) {
   const [open, setOpen] = useState(false);
   const closeMenu = () => setOpen(false);
+  const handlePress = (onPress) => () => {
+    onPress();
+    closeMenu();
+  };
   return (
     <Menu
       visible={open}
@@ -23,7 +27,7 @@ function AppMenu({ icon, items, color }) {
           <Menu.Item
             icon={item.icon}
             title={item.title}
-            onPress={item.onPress}
+            onPress={handlePress(item.onPress)}
             key={item.title}
           />
         ))}

@@ -12,7 +12,7 @@ function ShoppingListCard({ data }) {
   return (
     <Touchable
       onPress={() => navigator.navigate("shoppingPage", { id: data.id })}
-      style={{ marginVertical: 10, backgroundColor: "white", elevation: 5 }}
+      style={{ marginVertical: 2, backgroundColor: "white", elevation: 5 }}
     >
       <View style={styles.root}>
         <View style={styles.left}>

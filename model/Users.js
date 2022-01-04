@@ -2,7 +2,6 @@
 
 import * as SQLite from "expo-sqlite";
 (async () => {
-  console.log("create table if not exist");
   const db = SQLite.openDatabase("db.testDb");
   db.transaction((tx) => {
     tx.executeSql(
@@ -17,7 +16,6 @@ import * as SQLite from "expo-sqlite";
 
 export const createUser = (data) =>
   new Promise((resolve, reject) => {
-    console.log(data);
     const db = SQLite.openDatabase("db.testDb");
     db.transaction((tx) => {
       tx.executeSql(
@@ -35,7 +33,6 @@ export const createUser = (data) =>
 
 export const getUsers = () =>
   new Promise((resolve, reject) => {
-    console.log("fetching...");
     const db = SQLite.openDatabase("db.testDb");
     db.transaction((tx) => {
       tx.executeSql(
@@ -51,7 +48,6 @@ export const getUsers = () =>
 
 export const deleteUser = (id) =>
   new Promise((resolve, reject) => {
-    console.log("fetching...");
     const db = SQLite.openDatabase("db.testDb");
     db.transaction((tx) => {
       tx.executeSql(
