@@ -15,6 +15,11 @@ function IndividualTab(props) {
       {users.list.map((user) => (
         <UserCard key={user.id} data={user} />
       ))}
+      {!users?.list?.length && (
+        <AppText center color="rgba(0,0,0,0.6)">
+          Create new user by clicking + button below
+        </AppText>
+      )}
     </View>
   );
 }

@@ -29,7 +29,10 @@ function ShoppingListCard({ data }) {
             </AppText>
           </View>
           <View style={styles.bottom}>
-            <AppText style={styles.sampleItems}>Book,pen,table cover</AppText>
+            <AppText style={styles.sampleItems} numberOfLines={1}>
+              {data?.items?.map((item) => item.name)?.join(",") ||
+                "Cart is empty"}
+            </AppText>
           </View>
         </View>
         <View style={styles.itemscount}>
@@ -71,6 +74,9 @@ const styles = StyleSheet.create({
   sampleItems: {
     color: "rgba(0,0,0,0.6)",
     paddingTop: 3,
+  },
+  bottom: {
+    maxWidth: "65%",
   },
 });
 export default ShoppingListCard;

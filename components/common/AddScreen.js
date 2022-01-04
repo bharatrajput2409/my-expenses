@@ -1,8 +1,7 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 
-import AppText from "./AppText";
 import paperTheme from "../../config/paperTheme";
 import { List } from "react-native-paper";
 import { useDispatch } from "react-redux";
@@ -95,7 +94,7 @@ const styles = StyleSheet.create({
     zIndex: 1000,
   },
   addCard: {
-    backgroundColor: paperTheme.colors.background,
+    backgroundColor: "white",
     paddingHorizontal: 20,
   },
   title: {

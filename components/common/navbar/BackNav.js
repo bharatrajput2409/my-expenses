@@ -1,11 +1,9 @@
 import * as React from "react";
-import { StatusBar, StyleSheet, Text, View } from "react-native";
+import { StatusBar, StyleSheet } from "react-native";
 import { Appbar } from "react-native-paper";
 import Constants from "expo-constants";
 import defaultStyle from "../../../config/defaultStyle";
-import NavDrawer from "./NavDrawer";
 import AppIconButton from "../IconButton";
-import Touchable from "../Touchable";
 import paperTheme from "../../../config/paperTheme";
 
 const BackNav = ({ backAction, title, actions }) => {

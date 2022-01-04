@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { SafeAreaView, StyleSheet, Text, ScrollView, View } from "react-native";
-import { FAB, Portal, Provider } from "react-native-paper";
-import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import { SafeAreaView, StyleSheet, ScrollView } from "react-native";
+import { Provider } from "react-native-paper";
 
-import Constants from "expo-constants";
 import NavBar from "./navbar/NavBar";
 import defaultStyle from "../../config/defaultStyle";
-import AppFabs from "./Fabs";
-import TouchableComponent from "./Touchable";
 import BackNav from "./navbar/BackNav";
 import BottomNav from "./navbar/BottomNav";
 import paperTheme from "../../config/paperTheme";

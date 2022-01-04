@@ -17,7 +17,7 @@ function IndividualUser(props) {
   const user = users.filter((user) => user.id === userId)[0];
   const transaction = useSelector((state) => state.transaction);
   React.useEffect(() => {
-    dispatch(fetchTransaction(user.id));
+    dispatch(fetchTransaction(user?.id));
   }, []);
   const positivepayment = transaction.list.reduce(
     (p, c) => (c.amount > 0 ? p + c.amount : p),
@@ -46,7 +46,7 @@ function IndividualUser(props) {
       <AppText size={16} style={styles.heading}>
         Transactions
       </AppText>
-      {transaction.list.map((txn) => (
+      {transaction?.list?.map((txn) => (
         <PaymentCard
           key={txn.id}
           left={
@@ -55,6 +55,11 @@ function IndividualUser(props) {
           right={<AppText bold>₹{txn.amount}</AppText>}
         />
       ))}
+      {!transaction?.list?.length && (
+        <AppText light center>
+          Create new transaction using + button
+        </AppText>
+      )}
     </Screen>
   );
 }

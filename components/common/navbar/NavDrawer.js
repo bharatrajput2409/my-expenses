@@ -1,23 +1,29 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Linking, StyleSheet } from "react-native";
 import AppDrawer from "../Drawer";
-import { Drawer, Menu } from "react-native-paper";
+import { Drawer } from "react-native-paper";
 import { FontAwesome } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/core";
+import AppText from "../AppText";
 
 function NavDrawer({ open, setNavOpen, setActiveTab }) {
   const [active, setActive] = React.useState(0);
   const navigator = useNavigation();
   const navArray = [
     {
-      label: "About Us",
+      icon: ({ size, color }) => (
+        <FontAwesome name="user" size={size} color={color} />
+      ),
+      label: "About App",
       onPress: () => navigator.navigate("aboutUs"),
     },
     {
-      label: "Privacy Policy",
-    },
-    {
-      label: "Contact us",
+      icon: ({ size, color }) => (
+        <MaterialIcons name="send" size={size} color={color} />
+      ),
+      label: "Feedback",
+      onPress: () => Linking.openURL("mailto:bharatrajput2409@gmail.com"),
     },
   ];
   return (
@@ -36,6 +42,7 @@ function NavDrawer({ open, setNavOpen, setActiveTab }) {
             icon={item.icon}
           />
         ))}
+        <AppText></AppText>
       </Drawer.Section>
     </AppDrawer>
   );

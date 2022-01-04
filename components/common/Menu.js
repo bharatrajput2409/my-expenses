@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { Button, Divider, Menu, Provider } from "react-native-paper";
+import { Menu } from "react-native-paper";
 import AppIconButton from "./IconButton";
 
 function AppMenu({ icon, items, color }) {

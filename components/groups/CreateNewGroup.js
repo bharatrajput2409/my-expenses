@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { Chip, Text, TextInput } from "react-native-paper";
+import { TextInput } from "react-native-paper";
 import AppTextInput from "../common/AppTextInput";
-import paperTheme from "../../config/paperTheme";
 import AppChip from "../common/AppChip";
 
 function CreateNewGroup(props) {

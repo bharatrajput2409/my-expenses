@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
-import { List, Menu, Text } from "react-native-paper";
+import { StyleSheet } from "react-native";
+import { List } from "react-native-paper";
 import AppModel from "./Model";
 
 function SelectDialog({

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StatusBar, StyleSheet, View } from "react-native";
+import { Alert, StatusBar, StyleSheet, View } from "react-native";
 import { Appbar, Checkbox, Text } from "react-native-paper";
 import Constants from "expo-constants";
 import { FontAwesome } from "@expo/vector-icons";
@@ -20,6 +20,7 @@ import { createTranscation } from "../../model/Transaction";
 import { setActiveDialog, UnSetActiveDialog } from "../../store/ui";
 import { fetchTransaction } from "../../store/transaction";
 import { fetchUsers } from "../../store/users";
+import { deleteUser } from "../../model/Users";
 
 const UserProfileNavBar = ({ user }) => {
   const dispatch = useDispatch();
@@ -27,6 +28,28 @@ const UserProfileNavBar = ({ user }) => {
   const navigation = useNavigation();
   const handleBack = () => {
     navigation.goBack();
+  };
+  const handleUserDelete = (id) => () => {
+    Alert.alert(
+      `Delete ?`,
+      "Once deleted can not be restored",
+      [
+        {
+          text: "no",
+          onPress: () => {},
+          style: styles.btn,
+        },
+        {
+          text: "Yes",
+          onPress: async () => {
+            await deleteUser(id);
+            navigation.navigate("shopping");
+            dispatch(fetchUsers());
+          },
+        },
+      ],
+      { cancelable: true }
+    );
   };
   return (
     <>
@@ -63,7 +86,7 @@ const UserProfileNavBar = ({ user }) => {
           />
           <AppIconButton
             icon="delete"
-            onPress={() => console.log("delete user...")}
+            onPress={handleUserDelete(user?.id)}
             size={30}
           />
         </View>
@@ -86,7 +109,7 @@ function AddAmountForm({ dispatch, user }) {
       date: Date.now(),
     });
     if (res) {
-      dispatch(fetchTransaction(user.id));
+      dispatch(fetchTransaction(user?.id));
       dispatch(UnSetActiveDialog());
       dispatch(fetchUsers());
     }
@@ -101,7 +124,7 @@ function AddAmountForm({ dispatch, user }) {
     <View style={styles.addamountroot}>
       <Form
         onSubmit={handleSubmit}
-        initialValues={{ amount: "", txnWay: 1, comment: "", userId: user.id }}
+        initialValues={{ amount: "", txnWay: 1, comment: "", userId: user?.id }}
         validate={validate}
       >
         {({

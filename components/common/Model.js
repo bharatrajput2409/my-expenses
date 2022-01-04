@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, Modal, View } from "react-native";
 import { Button } from "react-native-paper";
 import defaultStyle from "../../config/defaultStyle";
-import TouchableComponent from "./Touchable";
 
 function AppModel({ children, visible, onRequestClose, style, ...otherProps }) {
   return (

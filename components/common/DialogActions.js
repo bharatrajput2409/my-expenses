@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import AppButton from "./AppButton";
-import { useDispatch } from "react-redux";
 import { UnSetActiveDialog } from "../../store/ui";
 
 function DialogActions({

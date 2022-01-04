@@ -1,5 +1,4 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 import { Text } from "react-native-paper";
 
 function AppText({
@@ -10,6 +9,7 @@ function AppText({
   color,
   padding,
   center,
+  light,
   ...others
 }) {
   const style_ = {};
@@ -26,6 +26,7 @@ function AppText({
   }
   if (center) style_.textAlign = "center";
   if (color) style_.color = color;
+  if (light) style_.color = "rgba(0,0,0,0.6)";
   return (
     <Text style={[style_, style]} {...others}>
       {children}

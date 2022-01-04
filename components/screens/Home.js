@@ -13,7 +13,7 @@ function Home({ navigation, route }) {
   const expeseTab = useSelector((state) => state.ui.expeseTab);
 
   return (
-    <Screen style={styles.root} expeseNav={activeTab === "expenses"} bottomNav>
+    <Screen style={styles.root} bottomNav>
       {activeTab === "shopping" && <ShoppingTab />}
       {/* {activeTab === "personal" && <PersonalTab />} */}
       {expeseTab == "individual" && activeTab === "expenses" && (

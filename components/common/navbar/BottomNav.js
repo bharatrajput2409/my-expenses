@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 import { FontAwesome } from "@expo/vector-icons";
-import AppText from "../AppText";
 import paperTheme from "../../../config/paperTheme";
 import Touchable from "../Touchable";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +12,7 @@ import {
 } from "../../../store/ui";
 import AppDialog from "../Dialog";
 import DialogActions from "../DialogActions";
-import { createUser, getUsers } from "../../../model/Users";
+import { createUser } from "../../../model/Users";
 import AppTextInput from "../AppTextInput";
 import Form from "../Form";
 import { fetchUsers } from "../../../store/users";
@@ -99,6 +98,7 @@ function AddNewUserForm({ dispatch }) {
     if (res) {
       dispatch(fetchUsers());
       dispatch(UnSetActiveDialog());
+      dispatch(setActiveTab("expenses"));
     }
   };
   const validate = (values) => {
@@ -148,6 +148,7 @@ function AddNewShoppingForm({ dispatch }) {
     if (res) {
       dispatch(fetchShopping());
       dispatch(UnSetActiveDialog());
+      dispatch(setActiveTab("shopping"));
     }
   };
   const validate = (values) => {

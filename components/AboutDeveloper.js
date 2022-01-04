@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   image: {
-    height: 80,
+    height: 100,
     width: 100,
     borderRadius: 100,
     marginTop: 50,

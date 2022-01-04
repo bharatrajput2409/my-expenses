@@ -1,6 +1,6 @@
 import * as React from "react";
 import { StyleSheet, View } from "react-native";
-import { DefaultTheme, Text, TextInput } from "react-native-paper";
+import { Text, TextInput } from "react-native-paper";
 import paperTheme from "../../config/paperTheme";
 
 const AppTextInput = ({

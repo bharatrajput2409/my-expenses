@@ -91,8 +91,25 @@ function ShoppingList(props) {
     },
   ];
   const handleItemDelete = (itemId) => async () => {
-    await deleteItem(list?.items, list?.id, itemId);
-    dispatch(fetchShopping());
+    Alert.alert(
+      `Delete?`,
+      `Item will be deleted and can not be restored`,
+      [
+        {
+          text: "Cancel",
+          onPress: () => {},
+          style: styles.btn,
+        },
+        {
+          text: "Delete",
+          onPress: async () => {
+            await deleteItem(list?.items, list?.id, itemId);
+            dispatch(fetchShopping());
+          },
+        },
+      ],
+      { cancelable: true }
+    );
   };
   const handleItemBought = (itemId) => async () => {
     setActiveItem(itemId);

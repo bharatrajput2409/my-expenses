@@ -36,7 +36,7 @@ export const getUsers = () =>
     const db = SQLite.openDatabase("db.testDb");
     db.transaction((tx) => {
       tx.executeSql(
-        "select * from  user",
+        "select * from  user order by id desc",
         null,
         (txObj, { rows: { _array } }) => {
           resolve(_array);
@@ -51,7 +51,7 @@ export const deleteUser = (id) =>
     const db = SQLite.openDatabase("db.testDb");
     db.transaction((tx) => {
       tx.executeSql(
-        "delete from shopping where id = ?",
+        "delete from user where id = ?",
         [id],
         (txObj, { rowsAffected }) => {
           resolve(rowsAffected);
