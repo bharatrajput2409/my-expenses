@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
+import { ImageBackground, StyleSheet, View } from "react-native";
 import { Button, Headline } from "react-native-paper";
 
 import GroupCard from "./GroupCard";

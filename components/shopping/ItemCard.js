@@ -2,12 +2,8 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import AppText from "../common/AppText";
-import AppIconButton from "../common/IconButton";
 import paperTheme from "../../config/paperTheme";
 import AppMenu from "../common/Menu";
-import { deleteItem } from "../../model/shopping";
-import { useDispatch } from "react-redux";
-import { fetchShopping } from "../../store/shopping";
 
 function ItemCard({ data, handleDelete, handleBought }) {
   console.log(data.bought, "data");

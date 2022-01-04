@@ -1,10 +1,9 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Paragraph, Text } from "react-native-paper";
+import { Paragraph } from "react-native-paper";
 import Screen from "../common/Screen";
 import UserProfileNavBar from "../individual/UserProfileNav";
 import AppText from "../common/AppText";
-import paperTheme from "../../config/paperTheme";
 import { useRoute } from "@react-navigation/core";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTransaction } from "../../store/transaction";

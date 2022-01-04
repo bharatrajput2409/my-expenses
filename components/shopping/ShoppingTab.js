@@ -1,10 +1,7 @@
 import React from "react";
-import { Button, StyleSheet, View } from "react-native";
-import { Text } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteShopping, getShopping } from "../../model/shopping";
-import { getTransactions } from "../../model/Transaction";
-import { createUser, deleteUser, getUsers } from "../../model/Users";
+
 import { fetchShopping } from "../../store/shopping";
 import AppText from "../common/AppText";
 import ShoppingListCard from "./ShoppingListCard";

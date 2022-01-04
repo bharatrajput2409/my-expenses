@@ -5,15 +5,12 @@ import AppText from "../common/AppText";
 import ItemCard from "../shopping/ItemCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation, useRoute } from "@react-navigation/core";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import prompt from "react-native-prompt-android";
 import { setActiveDialog, UnSetActiveDialog } from "../../store/ui";
 import AppDialog from "../common/Dialog";
 import Form from "../common/Form";
 import AppTextInput from "../common/AppTextInput";
 import DialogActions from "../common/DialogActions";
 import {
-  createShopping,
   deleteItem,
   deleteShopping,
   insertItem,

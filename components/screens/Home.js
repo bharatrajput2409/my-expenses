@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
-import { Headline, Provider } from "react-native-paper";
+import React from "react";
+import { StyleSheet } from "react-native";
 import Screen from "../common/Screen";
-import PersonalTab from "../personal/PersonalTab";
 import GroupsTab from "../groups/GroupsTab";
 import IndividualTab from "../individual/IndividualTab";
 import ShoppingTab from "../shopping/ShoppingTab";

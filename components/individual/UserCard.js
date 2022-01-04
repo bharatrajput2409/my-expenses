@@ -1,9 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
 
-import Paper from "../common/Paper";
-import paperTheme from "../../config/paperTheme";
 import { useNavigation } from "@react-navigation/core";
 import Touchable from "../common/Touchable";
 

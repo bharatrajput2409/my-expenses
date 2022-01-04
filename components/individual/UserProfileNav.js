@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Alert, StatusBar, StyleSheet, View } from "react-native";
-import { Appbar, Checkbox, Text } from "react-native-paper";
-import Constants from "expo-constants";
+import { Appbar, Text } from "react-native-paper";
 import { FontAwesome } from "@expo/vector-icons";
 
 import defaultStyle from "../../config/defaultStyle";

@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
 
 import Paper from "../common/Paper";
 import theme from "../../config/defaultStyle";

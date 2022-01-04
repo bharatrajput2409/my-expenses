@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Text } from "react-native-paper";
 import { useSelector } from "react-redux";
 import AppText from "../common/AppText";
 import UserCard from "./UserCard";
