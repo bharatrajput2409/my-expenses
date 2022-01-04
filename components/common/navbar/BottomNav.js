@@ -129,6 +129,7 @@ function AddNewUserForm({ dispatch }) {
             value={values.name}
             onChangeText={handleChange("name")}
             error={errors.name && touched.name && errors.name}
+            placeholder="i.e. Bharat singh"
           />
           <DialogActions
             nextBtnTitle="Save"
@@ -179,6 +180,7 @@ function AddNewShoppingForm({ dispatch }) {
             value={values.name}
             onChangeText={handleChange("name")}
             error={errors.name && touched.name && errors.name}
+            placeholder="i.e Wedding shopping list"
           />
           <DialogActions
             nextBtnTitle="Save"

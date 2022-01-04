@@ -146,6 +146,7 @@ function AddAmountForm({ dispatch, user }) {
               error={errors.amount && touched.amount && errors.amount}
               keyboardType="numeric"
               maxLength={7}
+              placeholder="i.e 120"
             />
             <AppTextInput
               label="Comment"
@@ -154,6 +155,7 @@ function AddAmountForm({ dispatch, user }) {
               value={values.comment}
               onChangeText={handleChange("comment")}
               error={errors.comment && touched.comment && errors.comment}
+              placeholder="i.e For party"
             />
             <View style={styles.txnWayWrapper}>
               <Touchable

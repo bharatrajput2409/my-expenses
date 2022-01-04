@@ -35,16 +35,16 @@ function ShoppingList(props) {
   };
   const handleReset = () => {
     Alert.alert(
-      `Reset`,
+      `Reset ?`,
       "All the items will be deleted and can not be restored",
       [
         {
-          text: "Cancel",
+          text: "no",
           onPress: () => {},
           style: styles.btn,
         },
         {
-          text: "reset",
+          text: "yes",
           onPress: () => {
             resetItems(id);
             dispatch(fetchShopping());
@@ -69,12 +69,12 @@ function ShoppingList(props) {
           `${list?.name} will be deleted and can not be restored`,
           [
             {
-              text: "Cancel",
+              text: "no",
               onPress: () => {},
               style: styles.btn,
             },
             {
-              text: "Delete",
+              text: "yes",
               onPress: async () => {
                 await deleteShopping(id);
                 navigator.navigate("shopping");
@@ -93,12 +93,12 @@ function ShoppingList(props) {
       `Item will be deleted and can not be restored`,
       [
         {
-          text: "Cancel",
+          text: "no",
           onPress: () => {},
           style: styles.btn,
         },
         {
-          text: "Delete",
+          text: "yes",
           onPress: async () => {
             await deleteItem(list?.items, list?.id, itemId);
             dispatch(fetchShopping());
@@ -204,7 +204,7 @@ function AddNewShoppingForm({ dispatch, id, restItems }) {
       }) => (
         <>
           <AppTextInput
-            label="Item name"
+            label="Item Name"
             name="name"
             onBlur={handleBlur("name")}
             value={values.name}
